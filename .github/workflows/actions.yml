@@ -14,6 +14,8 @@ jobs:
   run-github-actions: 
     runs-on: ubuntu-latest
     steps:
+      - name : Payload test from repository_dispatch
+        run: echo ${{ github.event.client_payload }}
       - name: Chekout action
         uses: actions/checkout@v1
       - name: List files
