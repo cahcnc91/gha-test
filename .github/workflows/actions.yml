@@ -1,11 +1,6 @@
 name: Actions Workflow 
 
-on:
-  push:
-    branches:
-      - master
-      - 'feature/*'
-      - '!feature/featc' #ignores match, need to be at the end
+on: push
     # tags:
     #   - v1.*
     # paths: 
