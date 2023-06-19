@@ -14,8 +14,7 @@ jobs:
           title: Title
           body: Body
           assignees: |
-            alialaa
-            alialaa17
+            cahcnc91
       - run: |
           echo ${{ steps.issue.outputs.issue }}
       # - name : Payload test from repository_dispatch
