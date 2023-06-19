@@ -17,6 +17,13 @@ jobs:
             cahcnc91
       - run: |
           echo ${{ steps.issue.outputs.issue }}
+      - uses: ./.github/actions/hello-docker
+        id: hello
+        with:
+          who-to-greet: "World"
+      - run: |
+          echo "Time: ${{ steps.hello.outputs.time }}"
+          echo $HELLO
       # - name : Payload test from repository_dispatch
       #   run: echo ${{ github.event.client_payload.env }}
       # - name: Chekout action
