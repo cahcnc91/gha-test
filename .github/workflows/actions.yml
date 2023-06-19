@@ -6,12 +6,12 @@ on:
       - master
       - 'feature/*'
       - '!feature/featc' #ignores match, need to be at the end
-    tags:
-      - v1.*
-    paths: 
-      - '**.js' # any change in js files
-      - 'docs/**'
-      - '!filename.js'
+    # tags:
+    #   - v1.*
+    # paths: 
+    #   - '**.js' # any change in js files
+    #   - 'docs/**'
+    #   - '!filename.js'
   # push:
   # schedule:
   #   - cron: "0/5 * * * *"
@@ -25,23 +25,30 @@ jobs:
   run-github-actions: 
     runs-on: ubuntu-latest
     steps:
-      - name : Payload test from repository_dispatch
-        run: echo ${{ github.event.client_payload.env }}
-      - name: Chekout action
-        uses: actions/checkout@v1
-      - name: List files
-        run: |
-          pwd
-          ls -a
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
-          echo "${{ github.token  }}"
-      - name: Simple JS Action
-        id: greet 
-        uses: actions/hello-world-javascript-action@v1
-        with: 
-          who-to-greet: Camila
-      - name: Log Greeting Time
-        run: echo "${{ steps.greet.outputs.time }}"
+      # - name : Payload test from repository_dispatch
+      #   run: echo ${{ github.event.client_payload.env }}
+      # - name: Chekout action
+      #   uses: actions/checkout@v1
+      # - name: List files
+      #   run: |
+      #     pwd
+      #     ls -a
+      #     echo $GITHUB_SHA
+      #     echo $GITHUB_REPOSITORY
+      #     echo $GITHUB_WORKSPACE
+      #     echo "${{ github.token  }}"
+      # - name: Simple JS Action
+      #   id: greet 
+      #   uses: actions/hello-world-javascript-action@v1
+      #   with: 
+      #     who-to-greet: Camila
+      # - name: Log Greeting Time
+      #   run: echo "${{ steps.greet.outputs.time }}"
+      - uses: actions/checkout@v2
+      - uses: "./.github/actions/hello"
+        id: hello
+        with:
+          who-to-greet: Luna
+      - run: |
+           echo "Time: ${{ steps.hello.outputs.time }}"
 
