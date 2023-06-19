@@ -51,4 +51,5 @@ jobs:
           who-to-greet: Luna
       - run: |
            echo "Time: ${{ steps.hello.outputs.time }}"
+           echo $HELLO
 
