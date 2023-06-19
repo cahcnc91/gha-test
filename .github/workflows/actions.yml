@@ -1,37 +1,23 @@
 name: Actions Workflow 
 
 on: push
-    # tags:
-    #   - v1.*
-    # paths: 
-    #   - '**.js' # any change in js files
-    #   - 'docs/**'
-    #   - '!filename.js'
-  # push:
-  # schedule:
-  #   - cron: "0/5 * * * *"
-  # repository_dispatch:
-  #   types: [build]
-
-  # pull_request:
-  #   types: [closed, assigned,opened,reopened]
 
 jobs: 
-  run-github-actions: 
+  testing-action:
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - uses: actions/checkout@v2
-      - uses: "./.github/actions/issue"
+      - uses: ./.github/actions/issue
         id: issue
-        with:
-          token: ${{secrets.GITHUB_TOKEN}}
-          title: Test title
-          body: test body
+        with: 
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Title
+          body: Body
           assignees: |
-            nierococ
-            cahcnc91
+            alialaa
+            alialaa17
       - run: |
-          echo ${{steps.issue.outputs.issue}}
+          echo ${{ steps.issue.outputs.issue }}
       # - name : Payload test from repository_dispatch
       #   run: echo ${{ github.event.client_payload.env }}
       # - name: Chekout action
