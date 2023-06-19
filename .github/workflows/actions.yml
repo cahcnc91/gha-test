@@ -25,6 +25,18 @@ jobs:
   run-github-actions: 
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: ./github/actions/issue
+        id: issue
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          title: Test title
+          body: test body
+          assignees: |
+            nierococ
+            cahcnc91
+      - run: |
+          echo ${{steps.issue.outputs.issue}}
       # - name : Payload test from repository_dispatch
       #   run: echo ${{ github.event.client_payload.env }}
       # - name: Chekout action
@@ -37,6 +49,8 @@ jobs:
       #     echo $GITHUB_REPOSITORY
       #     echo $GITHUB_WORKSPACE
       #     echo "${{ github.token  }}"
+
+
       # - name: Simple JS Action
       #   id: greet 
       #   uses: actions/hello-world-javascript-action@v1
@@ -44,12 +58,11 @@ jobs:
       #     who-to-greet: Camila
       # - name: Log Greeting Time
       #   run: echo "${{ steps.greet.outputs.time }}"
-      - uses: actions/checkout@v2
-      - uses: "./.github/actions/hello"
-        id: hello
-        with:
-          who-to-greet: Luna
-      - run: |
-           echo "Time: ${{ steps.hello.outputs.time }}"
-           echo $HELLO
+      # - uses: "./.github/actions/hello"
+      #   id: hello
+      #   with:
+      #     who-to-greet: Luna
+      # - run: |
+      #      echo "Time: ${{ steps.hello.outputs.time }}"
+      #      echo $HELLO
 
